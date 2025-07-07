@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+import typer
+import subprocess
+from rich.console import Console
+from pathlib import Path
+import config
+
+app = typer.Typer()
+gen_app = typer.Typer()
+app.add_typer(gen_app, name="gen")
+
+console = Console()
+
+@gen_app.command("server")
+def generate_server(
+    context: Path = typer.Argument(..., help="Context path."),
+    rakfile: Path = typer.Option(None, "--file", "-f", help="Path to Rakfile if it is not './Rakfile'."),
+    lang: str = typer.Option(None, "--lang", "-l", help="Language to use (check documentation). Default : Rust.")):
+
+    # Set defaults
+    rakfile_path = rakfile if rakfile else context / "Rakfile"
+    lang = lang.lower() if lang else "rust"
+    if lang not in config.SUPPORTED_SERVER_LANG:
+        console.print("[red]Unknown sub-command[/red]")
+        raise typer.Exit(-1)
+    
+    console.print("[green]Building server...[/green]")
+    console.print(f"[cyan]Contexte:[/cyan] {context}")
+    console.print(f"[cyan]Rakfile:[/cyan] {rakfile_path}")
+
+
+@gen_app.command("client")
+def generate_server(
+    context: Path = typer.Argument(..., help="Context path."),
+    rakfile: Path = typer.Option(None, "--file", "-f", help="Path to Rakfile if it is not './Rakfile'."),
+    lang: str = typer.Option(None, "--lang", "-l", help="Language to use (check documentation). Default : Rust.")):
+
+    # Set defaults
+    rakfile_path = rakfile if rakfile else context / "Rakfile"
+    lang = lang.lower() if lang else "rust"
+    if lang not in config.SUPPORTED_SERVER_LANG:
+        console.print("[red]Unknown sub-command[/red]")
+        raise typer.Exit(-1)
+    
+    console.print("[green]Building client...[/green]")
+    console.print(f"[cyan]Contexte:[/cyan] {context}")
+    console.print(f"[cyan]Rakfile:[/cyan] {rakfile_path}")
+
+
+if __name__ == "__main__":
+    app()

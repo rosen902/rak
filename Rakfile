@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Point typedef>
+    <lon type="double" idx="1"/>
+    <lat type="double" idx="2"/>
+</Point>
+
+<HotspotCreateReq typedef>
+    <owner_id type="str" idx="1"/>
+    <profil_picture type="blob" idx="2" optional/>
+    <name type="str" idx="3"/>
+    <description type="str" idx="4"/>
+    <location type="Point" idx="5"/>
+    <radius type="double" idx="6"/>
+    <ttl type="TimeSpan" idx="7"/>
+</HotspotCreateReq>
+
+
+<HotSpotsManager app>
+    <prefix name="v1">
+        <resource method="POST" uri="/"/>
+    </prefix>
+
+    <rest method="GET" path=/>
+
+</HotSpotsManager>
