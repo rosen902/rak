@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hotspots>
+
+    <HotspotCreateReq typedef="struct">
+        <owner_id type="str"/>
+        <profil_picture type="?blob"/>
+        <name type="str"/>
+        <description type="str"/>
+        <location type="Point"/>
+        <radius type="double"/>
+        <ttl type="TimeSpan"/>
+    </HotspotCreateReq>
+
+    <HotspotCreateResp typedef="struct">
+        <error type="?str"/>
+    </HotspotCreateResp>
+
+
+    <HotspotPatchReq typedef="struct">
+        <profil_picture type="?blob"/>
+        <name type="?str"/>
+        <description type="?str"/>
+        <location type="?Point"/>
+        <radius type="?double"/>
+        <ttl type="?TimeSpan"/>
+    </HotspotPatchReq>
+
+</hotspots>
+
+
+

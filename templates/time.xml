@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<time>
+
+    <Day typedef="enum">
+        <MONDAY/>
+        <TUESDAY/>
+        <WEDNESDAY/>
+        <THURSDAY/>
+        <FRIDAY/>
+        <SATURDAY/>
+        <SUNDAY/>
+    </Day>
+
+    <TimeSpan typedef="struct">
+        <start type="sint64" />
+        <end type="sint64" />
+    </TimeSpan>
+
+</time>

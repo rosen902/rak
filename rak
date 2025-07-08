@@ -1,51 +1,41 @@
 #!/usr/bin/env python3
 import typer
 import subprocess
+import os
 from rich.console import Console
 from pathlib import Path
-import config
+from generators import ProtoGenerator
+from logger import Logger
+
+DATABASES_DIR = Path("databases")
+MODELS_DIR = Path("templates")
+MICROSERVICES_DIR = Path("microservices")
 
 app = typer.Typer()
 gen_app = typer.Typer()
+create_app = typer.Typer()
 app.add_typer(gen_app, name="gen")
+app.add_typer(gen_app, name="create")
 
-console = Console()
+logger = Logger()
+
+@app.command("init")
+def init_rak_env():
+    DATABASES_DIR.mkdir(exist_ok=True)
+    MODELS_DIR.mkdir(exist_ok=True)
+    MICROSERVICES_DIR.mkdir(exist_ok=True)
+
 
 @gen_app.command("server")
-def generate_server(
-    context: Path = typer.Argument(..., help="Context path."),
-    rakfile: Path = typer.Option(None, "--file", "-f", help="Path to Rakfile if it is not './Rakfile'."),
-    lang: str = typer.Option(None, "--lang", "-l", help="Language to use (check documentation). Default : Rust.")):
-
-    # Set defaults
-    rakfile_path = rakfile if rakfile else context / "Rakfile"
-    lang = lang.lower() if lang else "rust"
-    if lang not in config.SUPPORTED_SERVER_LANG:
-        console.print("[red]Unknown sub-command[/red]")
-        raise typer.Exit(-1)
+def generate_server(service: Path = typer.Argument(..., help="Name of the microservice server to generate.")):
     
-    console.print("[green]Building server...[/green]")
-    console.print(f"[cyan]Contexte:[/cyan] {context}")
-    console.print(f"[cyan]Rakfile:[/cyan] {rakfile_path}")
+    if not MODELS_DIR.exists():
+        logger.panic(f"\"{MODELS_DIR.name}\" directory not found")
 
-
-@gen_app.command("client")
-def generate_server(
-    context: Path = typer.Argument(..., help="Context path."),
-    rakfile: Path = typer.Option(None, "--file", "-f", help="Path to Rakfile if it is not './Rakfile'."),
-    lang: str = typer.Option(None, "--lang", "-l", help="Language to use (check documentation). Default : Rust.")):
-
-    # Set defaults
-    rakfile_path = rakfile if rakfile else context / "Rakfile"
-    lang = lang.lower() if lang else "rust"
-    if lang not in config.SUPPORTED_SERVER_LANG:
-        console.print("[red]Unknown sub-command[/red]")
-        raise typer.Exit(-1)
+    logger.info("Start generating models..")
+    proto_gen = ProtoGenerator(MODELS_DIR)
+    proto_gen.load_models()
     
-    console.print("[green]Building client...[/green]")
-    console.print(f"[cyan]Contexte:[/cyan] {context}")
-    console.print(f"[cyan]Rakfile:[/cyan] {rakfile_path}")
-
 
 if __name__ == "__main__":
     app()

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<geometries>
+
+    <Point typedef="struct">
+        <lon type="double"/>
+        <lat type="double"/>
+    </Point>
+
+    <LineString typedef="struct">
+        <points type="Point[]"/>
+    </LineString>
+
+    <Polygon typedef="struct">
+        <points type="LineString[]"/>
+    </Polygon>
+
+</geometries>
