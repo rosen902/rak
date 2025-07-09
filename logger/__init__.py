@@ -9,7 +9,7 @@ class Logger:
         self.console.print(f"[green]INFO: {msg}[/green]")
     
     def warn(self, msg : str):
-        self.console.print(f"[orange]WARN: {msg}[/orange]")
+        self.console.print(f"[dark_orange]WARN: {msg}[/dark_orange]")
     
     def panic(self, msg : str):
         self.console.print(f"[red]ERR: {msg}[/red]")

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<hotspots>
+<errors>
 
     <HotspotCreateReq typedef="struct">
         <owner_id type="str"/>
@@ -25,7 +25,4 @@
         <ttl type="TimeSpan?"/>
     </HotspotPatchReq>
 
-</hotspots>
-
-
-
+</errors>

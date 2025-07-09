@@ -11,7 +11,7 @@
     </LineString>
 
     <Polygon typedef="struct">
-        <points type="LineString[]"/>
+        <rings type="LineString[]"/>
     </Polygon>
 
 </geometries>

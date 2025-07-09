@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hotspots-manager>
+    <config>
+        <DB_NAME/>
+        <DB_HOST/>
+        <DB_PORT/>
+        <DB_POOL_CONNS/>
+    </config>
+
+    <routes>
+        
+    </routes>
+</hotspots-manager>
